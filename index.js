@@ -31,14 +31,9 @@ process.stdin.on('keypress', (chunk, key) => {
             return port.write([255,2]); //izquierda
         case 'd' :
             return port.write([255,3]); //derecha
+        case 'space':
+            return port.write([0,0]);
         case 'q':
             return process.exit();
     } 
-    if(key.name == 'q') return process.exit();
-    setTimeout(() => {
-        isMoving = false;
-        setTimeout(() => {
-            if(!isMoving) console.log('stop')
-        },500)
-    }, 1);
 });
