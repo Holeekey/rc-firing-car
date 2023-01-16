@@ -2,9 +2,10 @@
   "name": "prueba-carro",
   "version": "1.0.0",
   "description": "Prueba de comunicacion PC y Arduino",
-  "main": "index.js",
+  "main": "keyboard.js",
   "scripts": {
-    "start": "node index.js"
+    "keyboard": "node keyboard.js",
+    "xbox": "node xbox.js"
   },
   "author": "Daniel Bruno",
   "license": "ISC",
