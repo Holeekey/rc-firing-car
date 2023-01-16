@@ -1,10 +1,12 @@
 #include <Servo.h>
 
+//Pins de velocidad para puentes H
 int ENAA=3;
 int ENBB=5;
 int ENAC=6;
 int ENBD=9;
 
+//Pins de dirección para puentes H
 int IN1A=2;
 int IN2A=10;
 int IN3B=4;
@@ -14,10 +16,11 @@ int IN2C=7;
 int IN3D=8;
 int IN4D=13;
 
+//Pines de cañón
 int cannonPin=A0;
 int cannonDirPin=A1;
-int aux=0;
 
+//Servomotorres
 Servo cannon;
 Servo cannonDir;
 
