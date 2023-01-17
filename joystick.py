@@ -57,7 +57,7 @@ def canon_dir_map(grados, joystickRight):
 if __name__ == '__main__':
     port = 'COM4'    
     try:
-        #ser = serial.Serial(port, 9600)
+        ser = serial.Serial(port, 9600)
         datos = [0,0,0,90]
         if get_connected()[0] == True:
 
@@ -73,7 +73,7 @@ if __name__ == '__main__':
                 b_button = get_button_values(state)["B"]
 
                 if b_button == True :
-                    #ser.close()
+                    ser.close()
                     break;
 
                 datos[1] = dir_map(joystickLeft)
@@ -86,7 +86,7 @@ if __name__ == '__main__':
                 print(datos[0], datos[1], datos[2], datos[3])                
                 print(byte_message)
 
-                #ser.write(byte_message)
+                ser.write(byte_message)
                 
                 time.sleep(0.05)
         else:
