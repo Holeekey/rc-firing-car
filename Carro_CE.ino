@@ -186,6 +186,12 @@ void setup (){
 void loop (){
 
   if(Serial.available()){
+    //Recibe un arreglo de 4 bytes
+    //[a,b,c,d]
+    //a => Velocidad de los motores (0-255)
+    //b => Direccion del carro (0-4)
+    //c => Accionar el motor del cañón (0-1)
+    //d => Direccion del cañón (0-180)
     Serial.readBytes(datos,4);
     //Velocidad Motores
     vel(datos[0]);

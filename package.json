@@ -4,13 +4,12 @@
   "description": "Prueba de comunicacion PC y Arduino",
   "main": "keyboard.js",
   "scripts": {
-    "keyboard": "node keyboard.js",
-    "xbox": "node xbox.js"
+    "keyboard": "node keyboard.js"
   },
   "author": "Daniel Bruno",
   "license": "ISC",
   "dependencies": {
-    "node-gyp": "^9.3.1",
+    "key-events": "^0.1.1",
     "serialport": "^10.5.0"
   }
 }
