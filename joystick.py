@@ -11,9 +11,9 @@ def dir_map(joystickLeft):
     if (x > -0.4) and (x < 0.4) and (y > -0.4) and (y < 0.4):
         return 0
     if (y > -x) and (y < x):
-        return 2
-    if (y > x) and (y < -x): 
         return 3
+    if (y > x) and (y < -x): 
+        return 2
     if (y >= abs(x)):
         return 1
     if (y < abs(x)):
@@ -31,9 +31,9 @@ def vel_map(joystickLeft, dir):
         return c_map(y,0.4, 1, 0, 255)
     if (dir==4):
         return c_map(-y, 0.4, 1, 0, 255)
-    if (dir==3):
-        return c_map(-x, 0.4, 1, 0, 255)
     if (dir==2):
+        return c_map(-x, 0.4, 1, 0, 255)
+    if (dir==3):
         return c_map(x,0.4, 1, 0, 255)
     
     return 0
