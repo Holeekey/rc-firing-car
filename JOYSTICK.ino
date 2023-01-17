@@ -1,7 +1,13 @@
 
 int pinX = A0;
 int pinY = A1;
-byte datos[2];
+
+//Botones para el cañon
+int botonDer = 7;
+int botonIzq = 6;
+int botonShoot = 5;
+int estadoIzq, estadoDer, estadoCannon
+byte datos[4];
 
 byte dir (int x,int y) {
 
@@ -37,11 +43,28 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(pinX,INPUT);
   pinMode(pinY,INPUT);
+  pinMode(botonDer, INPUT);
+  pinMode(botonIzq, INPUT);
+  pinMode(botonShoot, INPUT);
   Serial.begin(9600);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  //Dirección Cañon
+  estadoIzq = digitalRead(botonIzq);
+  estadoDer = digitalRead(botonDer); 
+
+  if(estadoIzq == HIGH)
+    datos[3] = 180;
+
+  if(estadoDer == HIGH)
+    datos[3] = 0;
+
+  //Disparar BOOM
+  estadoCannon = digitalRead(botonShoot);
+  datos[2] = estadoCannon
 
   //Dirección
   datos[1] = dir(analogRead(pinX)-512,analogRead(pinY)-512);
@@ -49,6 +72,6 @@ void loop() {
   //Velocidad
   datos[0] = vel(analogRead(pinX),analogRead(pinY),datos[1]);
 
-  Serial.write(datos,2);
+  Serial.write(datos,4);
   delay(50);
 }
