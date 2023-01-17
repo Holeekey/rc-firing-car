@@ -1,7 +1,8 @@
 const { SerialPort } = require('serialport')
 const readline = require('readline');
+const keyevents = require('key-events')
 
-let isMoving = false;
+let keys = keyevents()
 
 const port = new SerialPort({
     path:'COM4',
@@ -37,3 +38,5 @@ process.stdin.on('keypress', (chunk, key) => {
             return process.exit();
     } 
 });
+
+keys.on('keyup', () => port.write([0,0]))
