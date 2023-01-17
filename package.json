@@ -4,7 +4,8 @@
   "description": "Prueba de comunicacion PC y Arduino",
   "main": "keyboard.js",
   "scripts": {
-    "keyboard": "node keyboard.js"
+    "keyboard": "node keyboard.js",
+    "xbox": "python joystick.py"
   },
   "author": "Daniel Bruno",
   "license": "ISC",
