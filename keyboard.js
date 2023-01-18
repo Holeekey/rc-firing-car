@@ -47,7 +47,7 @@ process.stdin.on('keypress', (chunk, key) => {
             return port.write([vel,dir,isShooting ? 1 : 0,isMovingCanon && posCanon+3 < 180 ? posCanon+3 : posCanon]); //derecha cañon
         case 'p' :
             isShooting = !isShooting;
-            return port.write([vel,dir,isShooting ? 1 : isShooting ? 1 : 0,posCanon]); //disparo
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //disparo
         case 'q':
             return process.exit();
     } 
