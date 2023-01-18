@@ -1,4 +1,3 @@
-
 int pinX = A0;
 int pinY = A1;
 
@@ -6,7 +5,8 @@ int pinY = A1;
 int botonDer = 7;
 int botonIzq = 6;
 int botonShoot = 5;
-int estadoIzq, estadoDer, estadoCannon
+int estadoIzq, estadoDer, estadoCannon;
+int grado = 90; //Estado inicial del Cañon
 byte datos[4];
 
 byte dir (int x,int y) {
@@ -56,12 +56,22 @@ void loop() {
   estadoIzq = digitalRead(botonIzq);
   estadoDer = digitalRead(botonDer); 
 
-  if(estadoIzq == HIGH)
-    datos[3] = 180;
-
-  if(estadoDer == HIGH)
-    datos[3] = 0;
-
+  if(estadoIzq == HIGH && estadoDer == LOW){
+    grado=+ 3;
+    if(grado > 180)
+      datos[3] = 180;
+    else
+      datos[3] = grado;
+  }
+    
+  if(estadoDer == HIGH && estadoIzq == LOW){
+    grado=- 3
+    if(grado < 0)
+      datos[3] = 0
+    else
+      datos[3] = grado;
+  }
+    
   //Disparar BOOM
   estadoCannon = digitalRead(botonShoot);
   datos[2] = estadoCannon
