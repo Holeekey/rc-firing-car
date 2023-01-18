@@ -57,7 +57,7 @@ void loop() {
   estadoDer = digitalRead(botonDer); 
 
   if(estadoIzq == HIGH && estadoDer == LOW){
-    grado=+ 3;
+    grado+= 3;
     if(grado > 180)
       datos[3] = 180;
     else
@@ -65,7 +65,7 @@ void loop() {
   }
     
   if(estadoDer == HIGH && estadoIzq == LOW){
-    grado=- 3
+    grado-= 3
     if(grado < 0)
       datos[3] = 0
     else
