@@ -65,16 +65,16 @@ void loop() {
   }
     
   if(estadoDer == HIGH && estadoIzq == LOW){
-    grado-= 3
+    grado-= 3;
     if(grado < 0)
-      datos[3] = 0
+      datos[3] = 0;
     else
       datos[3] = grado;
   }
     
   //Disparar BOOM
   estadoCannon = digitalRead(botonShoot);
-  datos[2] = estadoCannon
+  datos[2] = estadoCannon;
 
   //Dirección
   datos[1] = dir(analogRead(pinX)-512,analogRead(pinY)-512);
