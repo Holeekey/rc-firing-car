@@ -1,8 +1,5 @@
 const { SerialPort } = require('serialport')
 const readline = require('readline');
-const keyevents = require('key-events')
-
-let keys = keyevents()
 
 const port = new SerialPort({
     path:'COM4',
@@ -12,31 +9,47 @@ const port = new SerialPort({
 readline.emitKeypressEvents(process.stdin);
 if (process.stdin.isTTY) process.stdin.setRawMode(true);
 
+posCanon = 90
+port.write([0,0,0,posCanon])
+dir = 0
+vel = 0
+isMovingCanon = false
+isShooting = false
+
 process.stdin.on('keypress', (chunk, key) => {
     if(!key) return;
     isMoving = true;
     switch(key.name){
-        case 'up':
-            return port.write([255,1]); //arriba
-        case 'down':
-            return port.write([255,4]); //abajo
-        case 'left':
-            return port.write([255,2]); //izquierda
-        case 'right':
-            return port.write([255,3]); //derecha
         case 'w' :
-            return port.write([255,1]); //arriba
+            dir = 1
+            vel = key.ctrl ? 255 : 180
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //arriba
         case 's' :
-            return port.write([255,4]); //abajo
+            dir = 4
+            vel = key.ctrl ? 255 : 180
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //abajo
         case 'a' :
-            return port.write([255,2]); //izquierda
+            dir = 2
+            vel = key.ctrl ? 255 : 180
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //izquierda
         case 'd' :
-            return port.write([255,3]); //derecha
+            dir = 3
+            vel = key.ctrl ? 255 : 180
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //derecha
         case 'space':
-            return port.write([0,0]);
+            dir = 0
+            vel = 0
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //stop
+        case 'left':
+            isMovingCanon = !isMovingCanon
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon-3 > 0 ? posCanon-3 : posCanon]); //izquierda cañon
+        case 'right':
+            isMovingCanon = !isMovingCanon
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon+3 < 180 ? posCanon+3 : posCanon]); //derecha cañon
+        case 'p' :
+            isShooting = !isShooting;
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //disparo
         case 'q':
             return process.exit();
     } 
 });
-
-keys.on('keyup', () => port.write([0,0]))
