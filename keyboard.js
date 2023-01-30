@@ -12,12 +12,10 @@ if (process.stdin.isTTY) process.stdin.setRawMode(true);
 posCanon = 90
 dir = 0
 vel = 0
-isMovingCanon = false
 isShooting = false
 
 process.stdin.on('keypress', (chunk, key) => {
     if(!key) return;
-    isMoving = true;
     switch(key.name){
         case 'w' :
             dir = 1
@@ -39,12 +37,12 @@ process.stdin.on('keypress', (chunk, key) => {
             dir = 0
             vel = 0
             return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //stop
-        case 'left':
-            isMovingCanon = !isMovingCanon
-            return port.write([vel,dir,isShooting ? 1 : 0,isMovingCanon && posCanon-3 > 0 ? posCanon-3 : posCanon]); //izquierda cañon
         case 'right':
-            isMovingCanon = !isMovingCanon
-            return port.write([vel,dir,isShooting ? 1 : 0,isMovingCanon && posCanon+3 < 180 ? posCanon+3 : posCanon]); //derecha cañon
+            posCanon = posCanon-3 > 0 ? posCanon-3 : posCanon
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //izquierda cañon
+        case 'left':
+            posCanon = posCanon+3 < 180 ? posCanon+3 : posCanon
+            return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //derecha cañon
         case 'p' :
             isShooting = !isShooting;
             return port.write([vel,dir,isShooting ? 1 : 0,posCanon]); //disparo

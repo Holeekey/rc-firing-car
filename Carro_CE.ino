@@ -180,7 +180,6 @@ void setup (){
   pinMode(cannonPin,OUTPUT);
   pinMode(cannonDirPin,OUTPUT);
   cannonDir.attach(cannonDirPin);
-  Serial.begin(9600);
 }
 
 void loop (){

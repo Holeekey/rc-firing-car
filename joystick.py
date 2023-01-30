@@ -42,10 +42,13 @@ def vel_map(joystickLeft, dir):
 def canon_dir_map(grados, joystickRight):
     x = joystickRight[0];
 
-    if(x > -0.4) and (x < 0.4):
+    if(x > -0.2) and (x < 0.2):
         return grados;
 
-    res = grados + c_map(x, 0.4, 1, 0, 3) 
+    if (x > 0.2):
+        res = grados - c_map(-x, 0.2, 1, 0, 5)
+    elif (x < -0.2):        
+        res = grados + c_map(x, 0.2, 1, 0, 5)
 
     if res > 180: 
         return 180
